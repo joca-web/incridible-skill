@@ -1,0 +1,12 @@
+{
+  "name": "incridible-skill-v2",
+  "version": "2.0.0",
+  "description": "Awwwards-level websites: art direction, GSAP + ScrollTrigger + Lenis, a tested component library, page transitions, WebGL, image-to-code and real-input browser QA.",
+  "author": {
+    "name": "jocaaurudo67-design"
+  },
+  "homepage": "https://github.com/jocaaurudo67-design/incridible-skill",
+  "repository": "https://github.com/jocaaurudo67-design/incridible-skill",
+  "license": "MIT",
+  "keywords": ["awwwards", "frontend", "gsap", "scrolltrigger", "lenis", "webgl", "page-transitions", "components", "image-to-code"]
+}

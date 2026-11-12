@@ -2,7 +2,7 @@ name: validate
 
 on:
   push:
-    branches: [main]
+    branches: [main, v2]
   pull_request:
 
 jobs:
@@ -16,11 +16,12 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: "3.12"
-      - name: Repository checks
+      - name: Repository checks (v1 and v2)
         run: python tools/validate.py
       - name: Smoke test the installer
         run: |
-          CLAUDE_HOME="$RUNNER_TEMP/claude" ./install.sh
-          test -f "$RUNNER_TEMP/claude/skills/incridible-skill/SKILL.md"
-          CLAUDE_HOME="$RUNNER_TEMP/claude" ./install.sh --uninstall
-          test ! -d "$RUNNER_TEMP/claude/skills/incridible-skill"
+          export CLAUDE_HOME="$RUNNER_TEMP/claude"
+          ./install.sh && test -f "$CLAUDE_HOME/skills/incridible-skill-v2/SKILL.md"
+          ./install.sh --v1 && test -f "$CLAUDE_HOME/skills/incridible-skill/SKILL.md"
+          ./install.sh --uninstall && ./install.sh --v1 --uninstall
+          test ! -d "$CLAUDE_HOME/skills/incridible-skill-v2" && test ! -d "$CLAUDE_HOME/skills/incridible-skill"
