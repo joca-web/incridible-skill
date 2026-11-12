@@ -1,0 +1,14 @@
+{
+  "name": "incridible-skill",
+  "description": "Awwwards-level web craft skill for AI coding agents",
+  "owner": {
+    "name": "jocaaurudo67-design"
+  },
+  "plugins": [
+    {
+      "name": "incridible-skill",
+      "source": "./",
+      "description": "Build Awwwards-level websites: art direction, GSAP + ScrollTrigger + Lenis motion, WebGL depth heroes, image-to-code and real-browser QA."
+    }
+  ]
+}
