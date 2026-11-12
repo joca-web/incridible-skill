@@ -40,14 +40,14 @@ Escolha uma forma. Instale **uma** versão só: a v1 e a v2 respondem aos mesmos
 Dentro do Claude Code:
 
 ```text
-/plugin marketplace add jocaaurudo67-design/incridible-skill
+/plugin marketplace add joca-web/incridible-skill
 /plugin install incridible-skill-v2@incridible-skill
 ```
 
 Ou pelo terminal:
 
 ```bash
-claude plugin marketplace add jocaaurudo67-design/incridible-skill
+claude plugin marketplace add joca-web/incridible-skill
 claude plugin install incridible-skill-v2@incridible-skill
 ```
 
@@ -56,7 +56,7 @@ Já usa a v1? Rode `/plugin marketplace update incridible-skill`, instale a v2 c
 ### Skills CLI (qualquer agente que leia `SKILL.md`)
 
 ```bash
-npx skills add jocaaurudo67-design/incridible-skill
+npx skills add joca-web/incridible-skill
 ```
 
 Escolha `incridible-skill-v2` quando perguntar.
@@ -66,7 +66,7 @@ Escolha `incridible-skill-v2` quando perguntar.
 Windows (PowerShell):
 
 ```powershell
-git clone https://github.com/jocaaurudo67-design/incridible-skill.git
+git clone https://github.com/joca-web/incridible-skill.git
 cd incridible-skill
 .\install.ps1             # v2 em $HOME\.claude\skills
 .\install.ps1 -Project    # v2 em .\.claude\skills do projeto atual
@@ -76,7 +76,7 @@ cd incridible-skill
 macOS e Linux:
 
 ```bash
-git clone https://github.com/jocaaurudo67-design/incridible-skill.git
+git clone https://github.com/joca-web/incridible-skill.git
 cd incridible-skill
 ./install.sh              # v2 em ~/.claude/skills
 ./install.sh --project    # v2 em ./.claude/skills do projeto atual

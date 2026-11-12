@@ -3,10 +3,10 @@
   "version": "1.0.0",
   "description": "Build Awwwards-level websites: art direction, GSAP + ScrollTrigger + Lenis motion, WebGL depth heroes, image-to-code and real-browser QA.",
   "author": {
-    "name": "jocaaurudo67-design"
+    "name": "joca-web"
   },
-  "homepage": "https://github.com/jocaaurudo67-design/incridible-skill",
-  "repository": "https://github.com/jocaaurudo67-design/incridible-skill",
+  "homepage": "https://github.com/joca-web/incridible-skill",
+  "repository": "https://github.com/joca-web/incridible-skill",
   "license": "MIT",
   "keywords": ["awwwards", "frontend", "gsap", "scrolltrigger", "lenis", "webgl", "image-to-code", "design", "animation"]
 }

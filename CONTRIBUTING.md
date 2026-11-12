@@ -20,7 +20,7 @@ Thanks for helping make this skill better. Issues and pull requests are welcome.
 ## Development
 
 ```bash
-git clone https://github.com/jocaaurudo67-design/incridible-skill.git
+git clone https://github.com/joca-web/incridible-skill.git
 cd incridible-skill
 python3 tools/validate.py        # frontmatter, paths, manifests, syntax (use `python` on Windows)
 ```
