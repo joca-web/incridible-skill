@@ -92,7 +92,7 @@ Copie a pasta `skills/incridible-skill` para `~/.claude/skills/` (todos os proje
 
 ### App do Claude (web e desktop)
 
-Baixe [`dist/incridible-skill.skill`](dist/incridible-skill.skill) e adicione pela seção de Skills nas configurações do Claude. O nome dos menus varia conforme o plano.
+Baixe [`dist/incridible-skill.plugin`](dist/incridible-skill.plugin) e abra no app do Claude para instalar como plugin, ou baixe [`dist/incridible-skill.skill`](dist/incridible-skill.skill) e adicione pela seção de Skills nas configurações. Use um dos dois, não os dois. O nome dos menus varia conforme o plano.
 
 ## Uso
 
@@ -178,7 +178,7 @@ skills/incridible-skill/
   assets/starters/           monument (página única) e editorial (três páginas)
   assets/webgl/              depth-hero.js
   scripts/                   shoot.mjs, filmstrip.py, vendor.mjs, compare.py, img_probe.py
-dist/incridible-skill.skill  skill empacotada
+dist/                        incridible-skill.skill e incridible-skill.plugin
 versions/v1/                 versão 1, arquivada sem mudanças (fora do plugin)
 tools/validate.py            verificações do repositório (também rodam no CI)
 install.sh, install.ps1      instaladores
