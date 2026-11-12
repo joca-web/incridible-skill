@@ -17,7 +17,9 @@ python3 -m http.server 4173 --directory <site-dir> >/dev/null 2>&1 &
 node <skill>/scripts/shoot.mjs http://localhost:4173 --out .incridible/after
 ```
 
-Useful flags: `--widths 1440,768,390` (default), `--steps 10` (scroll frames per width), `--settle 3200` (ms to wait after load for the preloader), `--block-cdn` (simulate GSAP and Lenis failing to load, the page must still read), `--no-reduced` (skip the reduced-motion pass), `--chrome /path/to/chrome`.
+Useful flags: `--widths 1440,768,390` (default), `--steps 10` (scroll frames per width), `--settle 3200` (ms to wait after load for the preloader), `--vendor DIR` (serve jsdelivr/unpkg/cdnjs scripts from DIR by file name, to test real libraries offline; fill DIR with `scripts/vendor.mjs`), `--block-cdn` (simulate the libraries failing to load, the page must still read), `--no-motion` (skip the real-input, hover and keyboard passes), `--no-reduced` (skip the reduced-motion pass), `--chrome /path/to/chrome`.
+
+What each width gets: static checks; stepped screenshots; a full-page shot; then a fresh reload and a **real-input motion pass** (wheel through Lenis on desktop widths, raw touch drags on phone widths) that records frame times and up to 16 frames (`w<W>-motion-NN.jpg`); on desktop widths a **pointer pass** that hovers up to 14 interactive elements, and a **keyboard pass** that tabs 12 times. Desktop widths run with a fine pointer and hover, phone widths with touch, so pointer-only code really runs. Turn the frames into one image with `python3 scripts/filmstrip.py OUT --width 1440` (add `--gif` for an animation).
 
 Outputs in the out folder: `report.md`, `report.json`, `w<width>-s<step>.png` frames, `w<width>-full.png` full-page screenshot.
 
@@ -30,12 +32,14 @@ FAIL means the page is not done:
 | `broken-image` | Image failed to load | Path or format |
 | `console-error` | Uncaught exception or error log | Fix the script |
 | `still-page` | Fewer than 8 elements changed transform, opacity or clip while scrolling | Add real motion, or check the triggers fire |
-| `stuck-hidden` | Text still invisible after scrolling the whole page | A reveal never fired; check trigger start, `once`, and the `.motion` guard |
+| `stuck-hidden` | Text still invisible after scrolling the whole page, including text pushed out of a tight mask (`clipped by …`) | A reveal never fired; a CSS transform start state fought GSAP percentages; a reveal re-hid itself after `clearProps` (see 09-components, pitfalls) |
 | `reduced-hidden` | Text invisible under reduced motion | Hidden start states must exist only inside the motion branch |
 | `placeholder-left` | `data-placeholder`, `lorem`, `TODO(content)` still present | Replace |
 | `load-failed` | Page did not load | Server or URL |
+| `scroll-stuck` | Real wheel or touch scrolling reached under 90% of the page | `lenis.stop()` left on, `overflow: hidden` on html/body, a pin or overlay eating input |
+| `no-scroll-motion` | Under 5 elements changed during real scrolling after a fresh load | Triggers never fire under real input, or the page has no scroll motion at all |
 
-WARN means "usually wrong, fix or be able to explain it": `small-text` (under 12 px), `tiny-target` (under 24 px on mobile), `missing-alt`, `no-lang`, `no-title`, `no-description`, `no-main`, `few-visuals` (fewer than 4), `heavy-page` (over 3 MB), `slow-lcp` (over 2.5 s), `layout-shift` (CLS over 0.1), `font-count` (more than 2 families).
+WARN means "usually wrong, fix or be able to explain it": `small-text` (under 12 px), `tiny-target` (under 24 px on mobile), `missing-alt`, `no-lang`, `no-title`, `no-description`, `no-main`, `few-visuals` (fewer than 4), `heavy-page` (over 3 MB), `slow-lcp` (over 2.5 s), `layout-shift` (CLS over 0.1, with the elements that shifted), `font-count` (more than 2 families), `jank` (p95 frame time over 50 ms during real scrolling; headless uses software rendering, so compare runs rather than trusting the number), `flat-hover` (under half of interactive elements change on hover), `focus-invisible` (focused element shows no ring), `focus-offscreen` (focus lands on something off screen, often a closed menu), `lib-warning` (GSAP, ScrollTrigger, Lenis or WebGL warnings in the console, e.g. a missing target), `vendor-miss` (`--vendor` had no file for a CDN request).
 
 Run again with `--block-cdn`. The page must still show every section; only the animation is allowed to be missing.
 
@@ -67,6 +71,8 @@ For the scroll frames and a manual scroll:
 - Does anything block reading (long preloader, slow reveal after a fast scroll)?
 - Do pinned scenes have enough scroll distance for their content?
 - Does it feel smooth at 4x CPU throttle on the user's machine? (not measurable in the headless run; say so)
+- Read the filmstrip: every frame should show content, reveals should be visible mid-way in some frames, pinned scenes should hold while their content changes, and no frame should be mostly empty.
+- Click what scrolling cannot reach: one page transition and the back button, each filter, a slider by drag and by arrow keys, menus and accordions.
 
 ## 4. Manual checks
 
@@ -95,7 +101,7 @@ Keep it short and plain.
 ```
 Direction: <name>. Idea: <one sentence>. Signature moment: <what the visitor does>.
 Stack: <libs>, why.
-Result (shoot.mjs): 0 FAIL, <n> WARN; movers <n>; LCP <s>; weight <MB>; CLS <x>; reduced motion OK; blocked CDN OK.
+Result (shoot.mjs): 0 FAIL, <n> WARN; movers <n>; real-input reach 100% (wheel and touch); p95 frame <ms> (software); hover <n>/<n>; focus <n>/<n>; LCP <s>; weight <MB>; CLS <x>; reduced motion OK; blocked CDN OK; libraries: real (CDN or vendored).
 Scores (last round): Design x, Usability x, Creativity x, Content x, weighted x. Remaining weakness: <one line>.
 Placeholders / user must supply: <list>.
 Images and licences: <title, creator, licence, source, where credited>.

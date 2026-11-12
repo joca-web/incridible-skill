@@ -23,7 +23,7 @@ Ela é organizada pelos pesos de avaliação do Awwwards (Design 40%, Usabilidad
 
 ## Novidades da v2
 
-A versão 2 fica numa pasta própria, [`v2/skills/incridible-skill-v2`](v2/skills/incridible-skill-v2). A versão 1 continua intacta em [`skills/incridible-skill`](skills/incridible-skill).
+Mesmo nome, mesmo plugin, mesmos comandos: instalar ou atualizar a `incridible-skill` já entrega a versão 2. A versão 1 fica arquivada, sem mudanças, em [`versions/v1/`](versions/v1).
 
 - **Animações testadas de verdade.** Todos os componentes e os dois starters rodaram com GSAP 3.15 e Lenis 1.3 reais no Chrome, com scroll por roda do mouse (desktop) e arraste de toque (celular). Isso achou e corrigiu bugs que o teste simulado da v1 não pegava, como um título principal que nunca aparecia e revelações que voltavam a se esconder. As lições estão escritas na skill.
 - **Biblioteca de componentes: 24 efeitos em 16 módulos**, ativados por atributos `data-*` e com versão estática se algo falhar: revelação de texto por linha/palavra/letra, texto embaralhado, rastro de imagens no cursor, cards empilhados, filtros com Flip e vista em lista, slider arrastável com inércia, linha SVG se desenhando, distorção de imagem em WebGL, fundo em shader, fonte variável que reage ao cursor e ao scroll, imagem que expande, revelação em lote, parallax, cursor customizado, botão magnético, inclinação 3D, marquee, contadores, acordeão suave, barra de progresso e transições entre páginas.
@@ -33,7 +33,7 @@ A versão 2 fica numa pasta própria, [`v2/skills/incridible-skill-v2`](v2/skill
 
 ## Instalação
 
-Escolha uma forma. Instale **uma** versão só: a v1 e a v2 respondem aos mesmos pedidos.
+Escolha uma forma.
 
 ### Plugin do Claude Code (recomendado)
 
@@ -41,25 +41,28 @@ Dentro do Claude Code:
 
 ```text
 /plugin marketplace add joca-web/incridible-skill
-/plugin install incridible-skill-v2@incridible-skill
+/plugin install incridible-skill@incridible-skill
 ```
 
 Ou pelo terminal:
 
 ```bash
 claude plugin marketplace add joca-web/incridible-skill
-claude plugin install incridible-skill-v2@incridible-skill
+claude plugin install incridible-skill@incridible-skill
 ```
 
-Já usa a v1? Rode `/plugin marketplace update incridible-skill`, instale a v2 como acima e depois `/plugin uninstall incridible-skill@incridible-skill`. A v1 continua disponível como `incridible-skill@incridible-skill`.
+Já instalou antes? Atualize para a versão mais nova:
+
+```bash
+claude plugin marketplace update incridible-skill
+claude plugin update incridible-skill@incridible-skill
+```
 
 ### Skills CLI (qualquer agente que leia `SKILL.md`)
 
 ```bash
 npx skills add joca-web/incridible-skill
 ```
-
-Escolha `incridible-skill-v2` quando perguntar.
 
 ### Scripts de instalação
 
@@ -68,9 +71,8 @@ Windows (PowerShell):
 ```powershell
 git clone https://github.com/joca-web/incridible-skill.git
 cd incridible-skill
-.\install.ps1             # v2 em $HOME\.claude\skills
-.\install.ps1 -Project    # v2 em .\.claude\skills do projeto atual
-.\install.ps1 -V1         # a versão 1 no lugar
+.\install.ps1             # instala em $HOME\.claude\skills
+.\install.ps1 -Project    # instala em .\.claude\skills do projeto atual
 ```
 
 macOS e Linux:
@@ -78,33 +80,32 @@ macOS e Linux:
 ```bash
 git clone https://github.com/joca-web/incridible-skill.git
 cd incridible-skill
-./install.sh              # v2 em ~/.claude/skills
-./install.sh --project    # v2 em ./.claude/skills do projeto atual
-./install.sh --v1         # a versão 1 no lugar
+./install.sh              # instala em ~/.claude/skills
+./install.sh --project    # instala em ./.claude/skills do projeto atual
 ```
 
-Para remover: `-Uninstall` / `--uninstall` (junto com `-V1` / `--v1` para a versão 1).
+Rode o instalador de novo para atualizar. Para remover: `-Uninstall` / `--uninstall`.
 
 ### Cópia manual
 
-Copie a pasta `v2/skills/incridible-skill-v2` para `~/.claude/skills/` (todos os projetos) ou `<projeto>/.claude/skills/` (só um). No Windows, `~` é a sua pasta de usuário (`C:\Users\seu-nome`).
+Copie a pasta `skills/incridible-skill` para `~/.claude/skills/` (todos os projetos) ou `<projeto>/.claude/skills/` (só um). No Windows, `~` é a sua pasta de usuário (`C:\Users\seu-nome`).
 
 ### App do Claude (web e desktop)
 
-Baixe [`dist/incridible-skill-v2.skill`](dist/incridible-skill-v2.skill) e adicione pela seção de Skills nas configurações do Claude. O nome dos menus varia conforme o plano.
+Baixe [`dist/incridible-skill.skill`](dist/incridible-skill.skill) e adicione pela seção de Skills nas configurações do Claude. O nome dos menus varia conforme o plano.
 
 ## Uso
 
 A skill é acionada sozinha quando você pede sites premium, animados ou nível Awwwards. Você também pode citá-la pelo nome.
 
 ```text
-Faça um site de três páginas para um estúdio de design de interiores. Use a incridible-skill-v2:
+Faça um site de três páginas para um estúdio de design de interiores. Use a incridible-skill:
 direção editorial, transições entre páginas, slider de projetos arrastável, e verifique cada página no navegador.
 ```
 
 ```text
 Aqui está um print do design (ref.png). Recrie com fidelidade de pixel e depois adicione o
-movimento que ele sugere. Use a incridible-skill-v2 e me mostre os números do diff.
+movimento que ele sugere. Use a incridible-skill e me mostre os números do diff.
 ```
 
 ```text
@@ -124,7 +125,7 @@ Quando a inspiração é um site real, a skill estuda técnica e estrutura. Ela 
 7. **Gate.** Inspeção em navegador real em 1440, 768 e 390 px com as bibliotecas reais e entrada real, uma folha de quadros para olhar, e um loop de olhar e corrigir pontuado com os pesos do Awwwards.
 8. **Relatório.** Notas, números, placeholders, licenças e o que não foi verificado.
 
-Detalhes completos: [`v2/skills/incridible-skill-v2/SKILL.md`](v2/skills/incridible-skill-v2/SKILL.md).
+Detalhes completos: [`skills/incridible-skill/SKILL.md`](skills/incridible-skill/SKILL.md).
 
 ## Componentes
 
@@ -144,11 +145,11 @@ Copie `assets/components/` para o site e depois:
 <section data-shader-bg="#0f0e0d, #ff4d1c, #f2efe9">…</section>
 ```
 
-O catálogo completo, com a marcação de cada um e quais combinam com cada direção, está em [`references/09-components.md`](v2/skills/incridible-skill-v2/references/09-components.md).
+O catálogo completo, com a marcação de cada um e quais combinam com cada direção, está em [`references/09-components.md`](skills/incridible-skill/references/09-components.md).
 
 ## Ferramentas de verificação
 
-Ficam em `v2/skills/incridible-skill-v2/scripts/`.
+Ficam em `skills/incridible-skill/scripts/`.
 
 | Script | Precisa de | Faz |
 |---|---|---|
@@ -160,8 +161,8 @@ Ficam em `v2/skills/incridible-skill-v2/scripts/`.
 
 ```powershell
 python -m http.server 4173 --directory meu-site
-node v2\skills\incridible-skill-v2\scripts\shoot.mjs http://localhost:4173 --out .incridible\after
-python v2\skills\incridible-skill-v2\scripts\filmstrip.py .incridible\after --width 1440
+node skills\incridible-skill\scripts\shoot.mjs http://localhost:4173 --out .incridible\after
+python skills\incridible-skill\scripts\filmstrip.py .incridible\after --width 1440
 ```
 
 (Abra o servidor em um terminal e rode os outros comandos em outro.) No macOS e Linux use `python3`. O `shoot.mjs` termina com código 1 quando encontra qualquer FAIL, então pode rodar em CI.
@@ -169,20 +170,18 @@ python v2\skills\incridible-skill-v2\scripts\filmstrip.py .incridible\after --wi
 ## Estrutura do repositório
 
 ```text
-.claude-plugin/              marketplace (lista v2 e v1) e manifest do plugin v1
-skills/incridible-skill/     versão 1 (sem mudanças)
-v2/
-  .claude-plugin/plugin.json manifest do plugin v2
-  skills/incridible-skill-v2/
-    SKILL.md                 fluxo, regras, roteamento
-    references/              9 guias (o 09 é o catálogo de componentes)
-    assets/components/       biblioteca de componentes
-    assets/starters/         monument (página única) e editorial (três páginas)
-    assets/webgl/            depth-hero.js
-    scripts/                 shoot.mjs, filmstrip.py, vendor.mjs, compare.py, img_probe.py
-dist/                        skills empacotadas (.skill) da v1 e da v2
+.claude-plugin/              manifests do plugin e do marketplace
+skills/incridible-skill/
+  SKILL.md                   fluxo, regras, roteamento
+  references/                9 guias (o 09 é o catálogo de componentes)
+  assets/components/         biblioteca de componentes
+  assets/starters/           monument (página única) e editorial (três páginas)
+  assets/webgl/              depth-hero.js
+  scripts/                   shoot.mjs, filmstrip.py, vendor.mjs, compare.py, img_probe.py
+dist/incridible-skill.skill  skill empacotada
+versions/v1/                 versão 1, arquivada sem mudanças (fora do plugin)
 tools/validate.py            verificações do repositório (também rodam no CI)
-install.sh, install.ps1      instaladores (v2 por padrão, --v1 para a versão 1)
+install.sh, install.ps1      instaladores
 ```
 
 ## Escopo e limites

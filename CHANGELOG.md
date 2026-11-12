@@ -4,8 +4,8 @@ All notable changes to this project are documented here. The format follows [Kee
 
 ## [2.0.0] - 2026-11-12
 
-Version 2 is a new skill, `incridible-skill-v2`, in `v2/skills/incridible-skill-v2/` and a new plugin
-(`incridible-skill-v2@incridible-skill`). Version 1 is unchanged.
+Same skill and plugin name (`incridible-skill@incridible-skill`); `claude plugin update incridible-skill@incridible-skill`
+upgrades an existing install. Version 1 is archived, unchanged, in `versions/v1/`.
 
 ### Added
 - Component library: 24 effects in 16 ES modules with static fallbacks (split-text reveals, scramble, image trail, stacking cards, Flip filters, draggable inertia slider, SVG drawing, WebGL distortion, shader background, variable-font proximity and scroll axis, expanding media, batch reveal, inner and element parallax, cursor, magnetic, tilt, marquee, counters, accordion, progress, page transitions) and `references/09-components.md`.
@@ -13,7 +13,7 @@ Version 2 is a new skill, `incridible-skill-v2`, in `v2/skills/incridible-skill-
 - `shoot.mjs`: `--vendor` (serve CDN scripts locally), real wheel and touch scroll pass after a fresh reload with frame timing and recorded frames, hover pass, keyboard focus pass, fine pointer on desktop widths, detection of text stuck inside masks, new codes `scroll-stuck`, `no-scroll-motion`, `jank`, `flat-hover`, `focus-invisible`, `focus-offscreen`, `lib-warning`, `vendor-miss`.
 - `filmstrip.py` (contact sheet or GIF of the scroll) and `vendor.mjs` (fetch library builds for offline testing).
 - "Lessons from real-browser testing" in the motion reference.
-- Installers install v2 by default (`--v1` / `-V1` for version 1); validation and CI cover both versions.
+- Validation covers the current skill and the archived v1; CI smoke-tests the installer.
 
 ### Fixed (found by testing with real GSAP and Lenis)
 - Monument starter hero headline stayed hidden inside its mask (CSS `translateY` start state read as pixels by GSAP).

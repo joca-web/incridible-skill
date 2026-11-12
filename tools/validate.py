@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Repository checks for incridible-skill (v1 and v2). Runs locally and in CI. Standard library only.
+"""Repository checks for incridible-skill (current skill and the archived v1). Runs locally and in CI. Standard library only.
 
   python3 tools/validate.py
 
@@ -14,7 +14,7 @@ import sys
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
-SKILLS = [ROOT / "skills" / "incridible-skill", ROOT / "v2" / "skills" / "incridible-skill-v2"]
+SKILLS = [ROOT / "skills" / "incridible-skill", ROOT / "versions" / "v1" / "incridible-skill"]
 errors = []
 
 
@@ -88,8 +88,8 @@ except Exception as e:  # noqa: BLE001
     fail(f"manifest error: {e}")
 
 print("\n== packages")
-for f in ("incridible-skill.skill", "incridible-skill-v2.skill"):
-    (ok if (ROOT / "dist" / f).exists() else fail)(f"dist/{f} present")
+for f in ("dist/incridible-skill.skill", "versions/v1/incridible-skill-v1.skill"):
+    (ok if (ROOT / f).exists() else fail)(f"{f} present")
 
 print()
 if errors:

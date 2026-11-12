@@ -30,8 +30,8 @@ To try changes locally, run the installer (`./install.sh` or `.\install.ps1`) an
 To test the inspector on the starter:
 
 ```bash
-python3 -m http.server 4173 --directory v2/skills/incridible-skill-v2/assets/starters/monument
-node v2/skills/incridible-skill-v2/scripts/shoot.mjs http://localhost:4173 --out .incridible/test
+python3 -m http.server 4173 --directory skills/incridible-skill/assets/starters/monument
+node skills/incridible-skill/scripts/shoot.mjs http://localhost:4173 --out .incridible/test
 ```
 
 The starter intentionally fails `placeholder-left` until its placeholders are replaced.
@@ -40,5 +40,5 @@ The starter intentionally fails `placeholder-left` until its placeholders are re
 
 1. Branch from `main`.
 2. Run `python3 tools/validate.py`.
-3. If you changed a skill folder (`v2/skills/incridible-skill-v2/` for new work), rebuild its file in `dist/` (a zip of the skill folder) and add a line to `CHANGELOG.md`. New work goes into v2; v1 only gets fixes.
+3. If you changed `skills/incridible-skill/`, rebuild `dist/incridible-skill.skill` (a zip of the skill folder), bump `version` in `.claude-plugin/plugin.json` and add a line to `CHANGELOG.md`. `versions/v1/` is an archive and is not edited.
 4. Describe what you tested and what you could not test.

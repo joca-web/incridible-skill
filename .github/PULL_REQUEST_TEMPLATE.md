@@ -7,6 +7,6 @@
 - [ ] `SKILL.md` is still under 500 lines
 - [ ] Code snippets were run, not just written
 - [ ] No copied third-party photos, logos, text or brand assets
-- [ ] `dist/*.skill` rebuilt for the changed skill and `CHANGELOG.md` updated (if the skill folder changed)
+- [ ] `dist/incridible-skill.skill` rebuilt, plugin version bumped and `CHANGELOG.md` updated (if the skill folder changed)
 
 ## What I tested, and what I could not

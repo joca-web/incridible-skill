@@ -1,19 +1,14 @@
 {
   "name": "incridible-skill",
-  "description": "Awwwards-level web craft skills for AI coding agents",
+  "description": "Awwwards-level web craft skill for AI coding agents",
   "owner": {
     "name": "joca-web"
   },
   "plugins": [
     {
-      "name": "incridible-skill-v2",
-      "source": "./v2",
-      "description": "Version 2 (recommended): component library, page transitions, multi-page starter, real-input browser QA."
-    },
-    {
       "name": "incridible-skill",
       "source": "./",
-      "description": "Version 1: workflow, references, single-page starter, WebGL depth hero and browser QA."
+      "description": "Awwwards-level websites: art direction, GSAP + ScrollTrigger + Lenis, a tested component library, page transitions, WebGL, image-to-code and real-input browser QA."
     }
   ]
 }

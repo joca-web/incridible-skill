@@ -17,6 +17,8 @@ Read this when one hero object should feel alive: a subject that tilts in 3D as 
 
 | Want | Use |
 |---|---|
+| Images that ripple and split RGB on hover (and optionally with scroll speed) | `components/webgl-distort.js` (`data-distort`) |
+| A living gradient with grain behind a section | `components/shader-bg.js` (`data-shader-bg`) |
 | Subject tilts with the pointer, real depth feel | Depth-map shader (section 2) |
 | Name or headline behind the subject | CSS sandwich (section 4), add depth shader later if worthwhile |
 | Soft shapes chasing the cursor over an image | Gooey SVG filter or a 2D canvas (section 5) |

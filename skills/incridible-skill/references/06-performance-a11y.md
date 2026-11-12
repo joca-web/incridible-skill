@@ -53,7 +53,7 @@ Targets on a mid-range phone over fast 4G: LCP under 2.5 s, CLS under 0.1, INP u
 - **Images**: AVIF or WebP, correct dimensions (do not ship 4000 px for a 600 px slot), `srcset`, `loading="lazy"` for below the fold, `decoding="async"`, `fetchpriority="high"` for the hero image.
 - **Preloader**: must not delay LCP beyond the real load; do not preload everything. Cap at about 2.5 s unless assets truly need longer.
 - **JS**: GSAP core is about 70 KB gzipped with ScrollTrigger; Lenis is small. Do not add three libraries for one effect. Load WebGL code only if the hero uses it and `requestIdleCallback` the setup.
-- **WebGL and video**: cap DPR at 2, pause off-screen, poster for video, lazy-start below the fold.
+- **WebGL and video**: cap DPR at 2 (render soft effects such as noise backgrounds below device resolution), pause off-screen, poster for video, lazy-start below the fold. Keep live WebGL contexts to about six per page; browsers drop the oldest beyond roughly sixteen, and every canvas that redraws during scroll costs a draw call per frame.
 - **Fonts**: two families at most, subset, `font-display: swap`, fallback with `size-adjust`.
 - **Layout shift**: explicit `width`/`height` or `aspect-ratio` on all media; reserve space for fonts; animate with transforms.
 - **Caching**: long `Cache-Control` for hashed assets when you control the server.

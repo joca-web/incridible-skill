@@ -1,6 +1,6 @@
 # Motion system
 
-Read this in Phase 5. All snippets assume vanilla JS with GSAP 3 and ScrollTrigger loaded globally, and Lenis for smooth scroll. The same code works in React or Next with the cleanup notes at the end. A working assembly of most recipes is in `assets/starter/main.js`.
+Read this in Phase 5. All snippets assume vanilla JS with GSAP 3 and ScrollTrigger loaded globally, and Lenis for smooth scroll. The same code works in React or Next with the cleanup notes at the end. A working assembly of most recipes is in `assets/starters/monument/main.js`.
 
 ## Contents
 1. Principles and tokens
@@ -24,6 +24,7 @@ Read this in Phase 5. All snippets assume vanilla JS with GSAP 3 and ScrollTrigg
 4. Performance rules
 5. Debugging
 6. React and Next
+7. Lessons from real-browser testing (v2)
 
 ## 1. Principles and tokens
 
@@ -141,13 +142,18 @@ Wrap each visual line in a mask and slide the inner span up. Split after fonts a
 ```css
 .line { display: block; overflow: hidden; padding-bottom: 0.08em; margin-bottom: -0.08em; } /* room for descenders */
 .line__inner { display: inline-block; will-change: transform; }
-.motion [data-split] .line__inner { transform: translateY(110%); }
+.motion [data-split] { visibility: hidden; }            /* hide only until the split exists */
+.motion [data-split].is-split { visibility: visible; }
 ```
 
 ```js
-gsap.from(inners, { yPercent: 110, duration: 1.1, ease: 'expo.out', stagger: 0.09,
+gsap.set(inners, { yPercent: 110 });                     // start state set by GSAP, not CSS
+el.classList.add('is-split');
+gsap.to(inners, { yPercent: 0, duration: 1.1, ease: 'expo.out', stagger: 0.09,
   scrollTrigger: { trigger: el, start: 'top 85%', once: true } });
 ```
+
+Pitfall found in real testing: a CSS start state such as `transform: translateY(110%)` is read by GSAP as a pixel `y` value. Tweening `yPercent` to 0 then leaves the pixel offset in place and the headline stays hidden inside its mask forever, with opacity 1, so a simple visibility check misses it. Set percentage start states with `gsap.set`, or tween the same property the CSS used. `shoot.mjs` reports this case as `stuck-hidden (clipped by …)`.
 
 Keep a visually hidden copy of the text for screen readers and mark the visual lines `aria-hidden`. GSAP's SplitText (now free) is the robust choice when the heading contains inline markup; the starter's own splitter handles plain text.
 
@@ -359,3 +365,19 @@ Use sparingly, only on images or large type, and disable for reduced motion.
 - Register plugins once: `gsap.registerPlugin(useGSAP, ScrollTrigger)`.
 - Never read layout during render. Split text in effects, after fonts are ready.
 - In Next, mark animated components `'use client'`; keep server-rendered content visible by default and hide it only inside the effect.
+
+
+## 7. Lessons from real-browser testing (v2)
+
+Everything in this file and in `assets/components/` was run with real GSAP 3.15 and Lenis 1.3 in Chrome, with wheel and touch input. These are the rules that came out of it.
+
+- **Never trust stubbed libraries.** v1 passed a stub test and still shipped a hero headline that never appeared. Test with the real builds (`scripts/vendor.mjs` when CDNs are blocked).
+- **Percent start states belong to GSAP.** `gsap.set(el, { yPercent: 110 })`, then `gsap.to(el, { yPercent: 0 })`. A CSS `transform: translateY(110%)` is read as pixels.
+- **`clearProps` re-exposes CSS.** If CSS hides an element until it animates, mark it (`.is-revealed`) before clearing inline styles.
+- **Set `.motion` before first paint.** Adding it from a deferred script shifted the whole layout (CLS 0.92 in the monument starter); an inline `<head>` script plus a 7 s failsafe fixed it (CLS 0).
+- **Headings never fade to nothing.** In pinned scenes, move words out of the frame instead of to `opacity: 0`.
+- **Fit display type to the real font.** Big condensed headlines overflow when the font fails and a wide fallback is used; measure and scale (`data-fit` in the monument starter).
+- **Lenis only on fine pointers.** Touch keeps native momentum; `components/scroll.js` does this by default.
+- **One WebGL canvas per effect, not per frame of scroll.** Redraw only while something changes (hover, explicit scroll effects) and stop off-screen.
+- **GSAP plugins are free.** SplitText (with `mask` and `autoSplit` since 3.13), Flip, Draggable, InertiaPlugin, ScrambleText, DrawSVG, MorphSVG and ScrollSmoother can be used in commercial work. Prefer them over home-made equivalents when they are already loaded, but keep a fallback if they fail to load.
+- **Recipes as components.** Many recipes above now exist as ready modules: see `references/09-components.md` before writing them again.
