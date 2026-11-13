@@ -1,7 +1,7 @@
 # Version 1 (archive)
 
 The first release of incridible-skill (1.0.0), kept for reference. It is **not** part of the plugin:
-installing `incridible-skill@incridible-skill` gives you the current version from `skills/incridible-skill/`.
+installing `awwwards-skill@awwwards-skill` gives you the current version from `skills/awwwards-skill/`.
 
 - `incridible-skill/`: the v1 skill folder, unchanged.
 - `incridible-skill-v1.skill`: the v1 package.

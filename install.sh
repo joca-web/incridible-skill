@@ -1,12 +1,12 @@
 #!/usr/bin/env bash
-# Installs incridible-skill for Claude Code (or any agent that reads ~/.claude/skills).
-#   ./install.sh               user-wide:    ~/.claude/skills/incridible-skill
-#   ./install.sh --project     this project: ./.claude/skills/incridible-skill
+# Installs awwwards-skill for Claude Code (or any agent that reads ~/.claude/skills).
+#   ./install.sh               user-wide:    ~/.claude/skills/awwwards-skill
+#   ./install.sh --project     this project: ./.claude/skills/awwwards-skill
 #   ./install.sh --uninstall   remove (add --project for the project copy)
 # Running it again updates an existing install to the version in this folder.
 set -euo pipefail
 
-NAME="incridible-skill"
+NAME="awwwards-skill"
 HERE="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 SRC="$HERE/skills/$NAME"
 PROJECT=0
@@ -39,7 +39,9 @@ mkdir -p "$BASE"
 [ -d "$DEST" ] && rm -rf "$DEST"
 cp -R "$SRC" "$DEST"
 echo "Installed $NAME to $DEST"
-if [ -d "$BASE/incridible-skill-v2" ]; then
-  echo "Note: an older separate copy named incridible-skill-v2 exists in $BASE. It duplicates this skill; delete that folder."
-fi
+for OLD in incridible-skill incridible-skill-v2; do
+  if [ -d "$BASE/$OLD" ]; then
+    echo "Note: an older copy named $OLD exists in $BASE. awwwards-skill replaces it; delete that folder so they do not compete."
+  fi
+done
 echo "Start a new agent session (or run /reload-plugins in Claude Code) to load it."

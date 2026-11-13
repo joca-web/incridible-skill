@@ -1,0 +1,14 @@
+/* stage.css: layout for stage.js. The stage element sets the size; canvases fill it. */
+[data-stage] { position: relative; isolation: isolate; }
+[data-stage] > img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: contain; transition: opacity 0.6s ease; }
+[data-stage].is-ready > img { opacity: 0; }
+.stage__canvas, .stage__ghost { position: absolute; inset: 0; width: 100%; height: 100%; display: block; }
+.stage__ghost { z-index: 0; }
+.stage__canvas { z-index: 1; }
+/* cursor reveal: the model shows only inside a soft circle that follows the pointer */
+[data-stage].is-reveal .stage__canvas {
+  -webkit-mask-image: radial-gradient(circle var(--mr, 0px) at var(--mx, 50%) var(--my, 50%), #000 55%, transparent 100%);
+          mask-image: radial-gradient(circle var(--mr, 0px) at var(--mx, 50%) var(--my, 50%), #000 55%, transparent 100%);
+}
+[data-stage].is-reveal { cursor: none; }
+@media (hover: none) { [data-stage].is-reveal { cursor: auto; } }

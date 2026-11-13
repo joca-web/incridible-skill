@@ -17,9 +17,11 @@ jobs:
         with:
           python-version: "3.12"
       - name: Repository checks
-        run: python tools/validate.py
+        run: |
+          pip install pyyaml
+          python tools/validate.py
       - name: Smoke test the installer
         run: |
           export CLAUDE_HOME="$RUNNER_TEMP/claude"
-          ./install.sh && test -f "$CLAUDE_HOME/skills/incridible-skill/SKILL.md"
-          ./install.sh --uninstall && test ! -d "$CLAUDE_HOME/skills/incridible-skill"
+          ./install.sh && test -f "$CLAUDE_HOME/skills/awwwards-skill/SKILL.md"
+          ./install.sh --uninstall && test ! -d "$CLAUDE_HOME/skills/awwwards-skill"

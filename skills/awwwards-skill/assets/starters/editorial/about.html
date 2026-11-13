@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="en" data-transition="curtain">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Studio: Atelier Nord</title>
+  <meta name="description" content="TODO(content): one sentence under 160 characters about this page.">
+  <meta name="theme-color" content="#f2efe9">
+  <meta property="og:title" content="Studio: Atelier Nord">
+  <meta property="og:image" content="/og.jpg">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='16' fill='%23141210'/%3E%3Ctext x='16' y='22' font-family='Georgia' font-size='18' text-anchor='middle' fill='%23f2efe9'%3EN%3C/text%3E%3C/svg%3E">
+  <script>
+    /* Motion state before first paint (no layout jump), curtain cover on arrival, 7 s failsafe if scripts never run. */
+    (function (d) {
+      var r = d.documentElement;
+      try { if (sessionStorage.getItem('pt')) r.classList.add('pt-enter'); } catch (e) {}
+      if (matchMedia('(prefers-reduced-motion: reduce)').matches) { r.classList.add('no-motion'); return; }
+      r.classList.add('motion');
+      setTimeout(function () { if (window.__awwwardsReady) return; r.classList.remove('motion', 'pt-enter'); r.classList.add('no-motion'); }, 7000);
+    })(document);
+  </script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter+Tight:wght@100..900&display=swap">
+  <link rel="stylesheet" href="components/components.css">
+  <link rel="stylesheet" href="site.css">
+  <script defer src="https://cdn.jsdelivr.net/npm/gsap@3/dist/gsap.min.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/gsap@3/dist/ScrollTrigger.min.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/gsap@3/dist/SplitText.min.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/gsap@3/dist/Flip.min.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/gsap@3/dist/Draggable.min.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/gsap@3/dist/InertiaPlugin.min.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/gsap@3/dist/ScrambleTextPlugin.min.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/lenis@1/dist/lenis.min.js"></script>
+  <script type="module" src="site.js"></script>
+</head>
+<body>
+  <a class="skip" href="#main">Skip to content</a>
+  <div class="curtain" aria-hidden="true"><span class="curtain__label"></span></div>
+  <div class="progress-bar" aria-hidden="true"><i></i></div>
+  <header class="nav">
+    <a class="nav__logo" href="index.html" data-transition-label="Atelier Nord">Atelier Nord</a>
+    <nav class="nav__links" aria-label="Main">
+      <a href="work.html">Work</a>
+      <a href="about.html" aria-current="page">Studio</a>
+      <a href="#contact" data-magnetic="0.3">Contact</a>
+    </nav>
+  </header>
+
+  <main id="main">
+    <header class="page-head">
+      <h1 data-reveal-split="lines" data-trigger="load">Two rooms, <em>one</em> studio.</h1>
+    </header>
+    <section class="wrap about-grid" aria-label="The studio">
+      <figure class="a1" data-inner-parallax data-speed="0.85" data-placeholder><img src="img/ph-4.webp" alt="Placeholder: the Copenhagen studio" width="1200" height="1500" loading="lazy"></figure>
+      <figure class="a2" data-inner-parallax data-speed="1.12" data-placeholder><img src="img/ph-5.webp" alt="Placeholder: the Porto workshop" width="1600" height="1000" loading="lazy"></figure>
+      <figure class="a3" data-inner-parallax data-speed="0.92" data-placeholder><img src="img/ph-8.webp" alt="Placeholder: material samples on a table" width="1200" height="1500" loading="lazy"></figure>
+      <figure class="a4" data-inner-parallax="10" data-reveal="scale" data-placeholder><img src="img/ph-7.webp" alt="Placeholder: the team at the long table" width="1600" height="1000" loading="lazy"></figure>
+      <p data-reveal-split="lines">We are eleven people in two cities. Copenhagen draws, Porto builds, and the train between them is where most decisions are made.</p>
+    </section>
+    <section class="section wrap" aria-label="Principle">
+      <h2 class="axis-title" data-scroll-axis="wght" data-from="150" data-to="850">Keep what deserves keeping.</h2>
+      <svg class="signature" style="margin-top:var(--space-3)" data-draw viewBox="0 0 1000 240" aria-hidden="true"><path d="M20 120 C 120 20, 180 220, 280 110 S 430 30, 520 120 S 680 200, 760 90 S 900 40, 980 130" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"/></svg>
+    </section>
+    <section class="section wrap faq" aria-labelledby="faq-title">
+      <h2 id="faq-title" class="serif" style="font-size:var(--step-3);margin-bottom:var(--space-3)" data-reveal-split="lines">Questions</h2>
+      <details data-accordion data-reveal><summary>How long does a home take?</summary><div><p>Usually nine to fourteen months, from first visit to the last lamp. Restoration takes longer because permits do.</p></div></details>
+      <details data-accordion data-reveal><summary>Do you work outside Denmark and Portugal?</summary><div><p>Yes, across Europe, when we can visit the site at least once a month.</p></div></details>
+      <details data-accordion data-reveal><summary>Can we buy the objects on their own?</summary><div><p>Most of them, in short runs. Write to us for the current list.</p></div></details>
+    </section>
+  </main>
+
+  <footer class="footer" id="contact">
+    <h2 data-reveal-split="lines">Let's make a room <em>worth</em> remembering.</h2>
+    <div class="footer__row">
+      <a class="btn btn--accent" href="mailto:studio@example.com" data-magnetic data-cursor="Write">studio@example.com</a>
+      <nav class="footer__links" aria-label="Social">
+        <a href="https://www.instagram.com/" rel="noopener">Instagram</a>
+        <a href="https://www.linkedin.com/" rel="noopener">LinkedIn</a>
+        <a href="work.html">All work</a>
+      </nav>
+    </div>
+    <p class="footer__legal">© 2026 Atelier Nord. Images: generated placeholders, replace before launch.</p>
+  </footer>
+</body>
+</html>

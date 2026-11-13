@@ -1,6 +1,6 @@
-# Installs incridible-skill for Claude Code (or any agent that reads ~\.claude\skills).
-#   .\install.ps1               user-wide:    $HOME\.claude\skills\incridible-skill
-#   .\install.ps1 -Project      this project: .\.claude\skills\incridible-skill
+# Installs awwwards-skill for Claude Code (or any agent that reads ~\.claude\skills).
+#   .\install.ps1               user-wide:    $HOME\.claude\skills\awwwards-skill
+#   .\install.ps1 -Project      this project: .\.claude\skills\awwwards-skill
 #   .\install.ps1 -Uninstall    remove (add -Project for the project copy)
 # Running it again updates an existing install to the version in this folder.
 param(
@@ -9,7 +9,7 @@ param(
 )
 
 $ErrorActionPreference = 'Stop'
-$Name = 'incridible-skill'
+$Name = 'awwwards-skill'
 $Src = Join-Path $PSScriptRoot "skills\$Name"
 
 if ($Project) {
@@ -34,7 +34,9 @@ New-Item -ItemType Directory -Force -Path $Base | Out-Null
 if (Test-Path $Dest) { Remove-Item -Recurse -Force $Dest }
 Copy-Item -Recurse -Path $Src -Destination $Dest
 Write-Host "Installed $Name to $Dest"
-if (Test-Path (Join-Path $Base 'incridible-skill-v2')) {
-  Write-Host "Note: an older separate copy named incridible-skill-v2 exists in $Base. It duplicates this skill; delete that folder."
+foreach ($Old in @('incridible-skill', 'incridible-skill-v2')) {
+  if (Test-Path (Join-Path $Base $Old)) {
+    Write-Host "Note: an older copy named $Old exists in $Base. awwwards-skill replaces it; delete that folder so they do not compete."
+  }
 }
 Write-Host "Start a new agent session (or run /reload-plugins in Claude Code) to load it."

@@ -2,6 +2,31 @@
 
 All notable changes to this project are documented here. The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/) and the project uses [Semantic Versioning](https://semver.org/).
 
+## [3.0.0] - 2026-11-13
+
+Renamed to **awwwards-skill** (skill, plugin and marketplace). Install with
+`/plugin install awwwards-skill@awwwards-skill` after adding the marketplace; remove the old
+`incridible-skill` first. incridible-skill 2.0 is archived, unchanged, in `versions/v2/`.
+
+### Added
+- 3D modelling in code: `assets/three/kit.js` (profiles and lathe, rounded boxes, tubes and arcs, panels and frames, SVG extrusion, curved label strips, vertex deform and bend, canvas-painted textures, PBR material presets, studio lighting, contact shadow, framing, stats and validation).
+- `scripts/model3d.mjs`: builds a model module or inspects a .glb in real Chrome; six-view sheet, triangle and material report with problems, .glb export, transparent poster, turntable frames.
+- Four parameterised, tested models: racing helmet, spirits bottle, headphones, collectible card (optional photo).
+- `assets/three/stage.js` + `stage.css`: lazy 3D stages with spin, cursor tilt, scroll turns, keyframed paths through pinned sections, entrance, float, and a cursor-mask reveal over a frosted ghost; poster fallback; touch and reduced-motion paths.
+- `product-3d` starter (cursor-revealed helmet hero, 3D cards through a pinned section, product stages, halftone type, diagonal wipes).
+- `references/10-3d-modeling.md`: when to model in code, use a client file or an AI 3D generator; recipes, materials, motion patterns, budgets, pitfalls, import and compression.
+- `shoot.mjs`: `scroll-slow` warning (still moving but slow) separate from `scroll-stuck`; detects Three.js loaded as a module. `filmstrip.py --pattern`. `vendor.mjs` can fetch Three.js.
+
+### Changed
+- Ready flag `window.__incridibleReady` is now `window.__awwwardsReady`; default output folder `.incridible/` is now `.awwwards/`.
+
+### Fixed (found while testing the 3D work)
+- Washed-out colours (ACES) → Neutral tone mapping.
+- Liquid inside transmissive glass rendered invisible → opaque glossy liquid preset.
+- Flat bottle label → `kit.wrap()` curved strip.
+- Dark fabric looked grey → sheen tinted from the fabric colour.
+- Slow touch scroll with continuous cursor-reveal rendering → one-time reveal on touch, lower DPR.
+
 ## [2.0.0] - 2026-11-12
 
 Same skill and plugin name (`incridible-skill@incridible-skill`); `claude plugin update incridible-skill@incridible-skill`

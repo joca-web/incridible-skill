@@ -1,0 +1,105 @@
+/* awwwards components: base styles. Theme with your own tokens:
+ * --bg, --ink, --accent, --muted, --ease-out, --ease-inout. Hidden start states exist only under
+ * html.motion, which boot() sets after it checks that GSAP loaded and reduced motion is off. */
+
+:root { --cmp-ease: var(--ease-out, cubic-bezier(0.16, 1, 0.3, 1)); --cmp-ease-io: var(--ease-inout, cubic-bezier(0.76, 0, 0.24, 1)); }
+
+/* split-reveal */
+.motion [data-reveal-split]:not(.is-split) { visibility: hidden; }
+.split-line { padding-bottom: 0.08em; margin-bottom: -0.08em; }
+.split-mask { display: inline-block; overflow: hidden; vertical-align: top; padding-bottom: 0.08em; margin-bottom: -0.08em; }
+.split-word { display: inline-block; }
+
+/* text-scramble: keep width steady */
+[data-scramble] { font-variant-numeric: tabular-nums; }
+
+/* image-trail */
+[data-image-trail] { position: relative; overflow: hidden; }
+.trail-img { position: absolute; left: 0; top: 0; aspect-ratio: 4 / 5; object-fit: cover; pointer-events: none; border-radius: 4px; will-change: transform, opacity; }
+
+/* stack-cards: sticky works without JS */
+[data-stack] { display: grid; gap: 6vh; }
+[data-stack-card] { position: sticky; top: calc(var(--stack-top, 12vh) + var(--i, 0) * 1.25rem); transform-origin: 50% 0%; }
+[data-stack-card]::after { content: ""; position: absolute; inset: 0; border-radius: inherit; background: #000; opacity: var(--shade, 0); pointer-events: none; }
+
+/* flip-filter */
+[data-flip-grid] { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 240px), 1fr)); gap: var(--gutter, 1.5rem); list-style: none; padding: 0; }
+[data-flip-grid].is-list { grid-template-columns: 1fr; }
+[data-flip-grid] > .is-filtered-out { display: none; }
+[data-filter][aria-pressed="true"], [data-layout][aria-pressed="true"] { background: var(--ink, #111); color: var(--bg, #fff); }
+
+/* drag-slider: native scroll-snap row by default */
+[data-drag-slider] { overflow-x: auto; scroll-snap-type: x mandatory; overscroll-behavior-x: contain; outline-offset: 6px; }
+[data-drag-slider] [data-track] { display: flex; gap: var(--gutter, 1.5rem); width: max-content; }
+[data-drag-slider] [data-track] > * { scroll-snap-align: start; flex: 0 0 auto; }
+[data-drag-slider].is-draggable { overflow: hidden; cursor: grab; user-select: none; }
+[data-drag-slider].is-grabbing { cursor: grabbing; }
+[data-drag-slider] img { -webkit-user-drag: none; user-select: none; }
+[data-progress] { height: 2px; margin-top: 1.5rem; background: color-mix(in srgb, currentColor 18%, transparent); }
+[data-progress] i { display: block; height: 100%; background: currentColor; transform-origin: 0 50%; transform: scaleX(0); }
+
+/* webgl-distort: canvas sits over the image; the image stays for alt text and fallback */
+[data-distort] { position: relative; overflow: hidden; }
+[data-distort] img { display: block; width: 100%; height: 100%; object-fit: cover; }
+.distort-canvas { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; }
+[data-distort].is-gl img { visibility: hidden; }
+
+/* shader-bg */
+[data-shader-bg] { position: relative; isolation: isolate; }
+.shader-bg { position: absolute; inset: 0; width: 100%; height: 100%; z-index: -1; pointer-events: none; }
+
+/* variable-type */
+.vt-word { display: inline-block; white-space: nowrap; }
+.vt-char { display: inline-block; }
+
+/* expand-media: static layout first, the JS adds the pin */
+[data-expand] { position: relative; }
+[data-expand-media] { overflow: hidden; }
+[data-expand-media] img { width: 100%; height: 100%; object-fit: cover; display: block; }
+[data-expand].is-expand { height: 100svh; display: grid; place-items: center; overflow: hidden; }
+[data-expand].is-expand [data-expand-media] { position: absolute; inset: 0; }
+[data-expand].is-expand h2 { position: relative; z-index: 2; display: flex; gap: 0.3em; mix-blend-mode: difference; color: #fff; }
+[data-expand-left], [data-expand-right] { display: inline-block; }
+
+/* cursor */
+.cursor { position: fixed; left: 0; top: 0; z-index: 9999; width: 12px; height: 12px; margin: -6px 0 0 -6px; border-radius: 50%; background: var(--accent, #ff4d1c); pointer-events: none; display: none; mix-blend-mode: difference; }
+.cursor__label { position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); font: 700 3px/1 system-ui, sans-serif; letter-spacing: 0.04em; text-transform: uppercase; color: #fff; white-space: nowrap; opacity: 0; }
+.has-cursor .cursor { display: block; }
+
+/* tilt */
+[data-tilt] { position: relative; will-change: transform; }
+.tilt__glare { position: absolute; inset: 0; border-radius: inherit; pointer-events: none; opacity: calc(var(--glare, 0) * 0.5); transition: opacity 0.4s; background: radial-gradient(circle at var(--gx, 50%) var(--gy, 50%), rgba(255, 255, 255, 0.45), transparent 55%); mix-blend-mode: soft-light; }
+
+/* reveal and inner parallax (start states are set by GSAP; CSS only hides until it runs) */
+.motion [data-reveal]:not(.is-revealed) { opacity: 0; }
+.has-inner-parallax { overflow: hidden; }
+.has-inner-parallax > img, .has-inner-parallax > video { height: 118% !important; margin-top: -9%; object-fit: cover; }
+
+/* marquee */
+[data-marquee] { overflow: hidden; }
+[data-marquee] > * { display: flex; width: max-content; white-space: nowrap; }
+.no-motion [data-marquee] { overflow-x: auto; }
+
+/* counters */
+[data-count] { font-variant-numeric: tabular-nums; }
+
+/* accordion */
+details[data-accordion] > summary { cursor: pointer; list-style: none; }
+details[data-accordion] > summary::-webkit-details-marker { display: none; }
+details[data-accordion] > :not(summary) { overflow: hidden; }
+
+/* progress */
+.progress-bar { position: fixed; inset: 0 0 auto 0; height: 3px; z-index: 60; pointer-events: none; }
+.progress-bar i { display: block; height: 100%; background: var(--accent, #ff4d1c); transform-origin: 0 50%; transform: scaleX(0); }
+.no-motion .progress-bar { display: none; }
+
+/* page-transition curtain */
+.curtain { position: fixed; inset: 0; z-index: 9000; background: var(--accent, #ff4d1c); color: var(--bg, #111); transform: scaleY(0); display: grid; place-items: center; pointer-events: none; overflow: hidden; }
+.curtain__label { font: 700 clamp(2rem, 8vw, 7rem)/1 var(--font-display, system-ui); letter-spacing: -0.03em; text-transform: uppercase; }
+.pt-enter .curtain { transform: scaleY(1); animation: pt-failsafe 0.6s 3s forwards; }
+@keyframes pt-failsafe { to { transform: scaleY(0); } }
+
+@media (prefers-reduced-motion: reduce) {
+  .curtain { display: none; }
+  .tilt__glare { display: none; }
+}

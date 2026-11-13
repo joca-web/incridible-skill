@@ -1,0 +1,142 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Studio Name: one line that says what this is</title>
+  <meta name="description" content="TODO(content): one sentence, under 160 characters, that says what the page is and who it is for.">
+  <meta name="theme-color" content="#111112">
+  <script>
+    /* Decide the motion state BEFORE first paint, so layout never jumps when the libraries arrive.
+       If the motion layer has not finished within 7s (CDN blocked or slow), fall back to the static page. */
+    (function (d) {
+      var r = d.documentElement;
+      if (matchMedia('(prefers-reduced-motion: reduce)').matches) { r.classList.add('no-motion'); return; }
+      r.classList.add('motion');
+      setTimeout(function () {
+        if (window.__awwwardsReady) return;
+        r.classList.remove('motion'); r.classList.add('no-motion');
+        var l = d.querySelector('.loader'); if (l) l.remove();
+      }, 7000);
+    })(document);
+  </script>
+  <meta property="og:title" content="Studio Name">
+  <meta property="og:description" content="TODO(content)">
+  <meta property="og:image" content="/og.jpg">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%23111112'/%3E%3Ccircle cx='16' cy='16' r='6' fill='%23ff4d1c'/%3E%3C/svg%3E">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,100..900&family=Inter+Tight:wght@400;500;600&display=swap">
+  <link rel="stylesheet" href="styles.css">
+  <script defer src="https://cdn.jsdelivr.net/npm/gsap@3/dist/gsap.min.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/gsap@3/dist/ScrollTrigger.min.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/lenis@1/dist/lenis.min.js"></script>
+  <script defer src="main.js"></script>
+</head>
+<body>
+  <!--
+    awwwards-skill starter. Everything marked data-placeholder or TODO(content) must be replaced:
+    shoot.mjs fails the build while any remain. Delete sections you do not need; keep the pattern.
+  -->
+  <a class="skip" href="#main">Skip to content</a>
+
+  <div class="loader" aria-hidden="true">
+    <span class="loader__label">Warming up</span><!-- TODO(content): label in the brand's voice -->
+    <span class="loader__count">0</span>
+  </div>
+  <div class="cursor" aria-hidden="true"><span class="cursor__label"></span></div>
+  <div class="progress" aria-hidden="true"><i></i></div>
+
+  <header class="nav">
+    <a class="nav__logo" href="#top" aria-label="Studio Name, home">SN</a>
+    <button class="nav__btn" type="button" aria-expanded="false" aria-controls="menu" data-magnetic>
+      <span class="nav__btn-text">Menu</span>
+    </button>
+  </header>
+
+  <nav class="menu" id="menu" aria-label="Main" inert>
+    <ul>
+      <li style="--i:0"><a href="#work">Work</a></li>
+      <li style="--i:1"><a href="#about">About</a></li>
+      <li style="--i:2"><a href="#archive">Archive</a></li>
+      <li style="--i:3"><a href="#contact">Contact</a></li>
+    </ul>
+  </nav>
+
+  <main id="main">
+    <!-- 1. HERO: name as monument, text sandwiched between a background and a subject -->
+    <section class="hero" id="top" data-bg="#111112" data-ink="#f4f3f1">
+      <div class="hero__bg ph" data-placeholder></div>
+      <h1 class="hero__title" data-split data-fit>Studio Name</h1>
+      <div class="hero__subject ph ph--subject" data-placeholder role="img" aria-label="Replace with the subject cutout"></div>
+      <div class="hero__meta">
+        <p>Established 2019</p>
+        <p class="hero__cue">Scroll</p>
+        <p>Next: Autumn drop</p>
+      </div>
+    </section>
+
+    <!-- 2. STATEMENT: words fill in as you scroll -->
+    <section class="statement" id="about" data-bg="#f4f3f1" data-ink="#111112">
+      <p class="statement__text" data-fill>
+        We build things that <em>move</em>, for people who notice. Replace this with one honest paragraph in the client's own voice, with two or three <em>key words</em> worth highlighting.
+      </p>
+    </section>
+
+    <!-- 3. HORIZONTAL GALLERY: pinned on desktop, native swipe row on mobile -->
+    <section class="hscroll" id="work" data-bg="#111112" data-ink="#f4f3f1" aria-label="Selected work">
+      <div class="hscroll__track">
+        <figure class="hscroll__item"><div class="media ph" data-placeholder></div><figcaption>Place, 2024</figcaption></figure>
+        <figure class="hscroll__item hscroll__item--tall"><div class="media ph" data-placeholder></div><figcaption>Place, 2023</figcaption></figure>
+        <figure class="hscroll__item"><div class="media ph" data-placeholder></div><figcaption>Place, 2023</figcaption></figure>
+        <figure class="hscroll__item hscroll__item--tall"><div class="media ph" data-placeholder></div><figcaption>Place, 2022</figcaption></figure>
+        <figure class="hscroll__item"><div class="media ph" data-placeholder></div><figcaption>Place, 2021</figcaption></figure>
+      </div>
+    </section>
+
+    <!-- 4. SPLIT STAGE: two paths with cursor labels -->
+    <section class="duo" data-bg="#f4f3f1" data-ink="#111112">
+      <a class="duo__half" href="#archive" data-cursor="Open">
+        <h2 data-split>On</h2><h2 data-split>Track</h2>
+        <p data-reveal>Results, numbers, the work itself.</p>
+      </a>
+      <a class="duo__half duo__half--alt" href="#archive" data-cursor="Open">
+        <h2 data-split>Off</h2><h2 data-split>Track</h2>
+        <p data-reveal>Campaigns, shoots, the person behind it.</p>
+      </a>
+    </section>
+
+    <!-- 5. ARCHIVE: base and hover image pairs with a circular mask wipe -->
+    <section class="archive" id="archive" data-bg="#111112" data-ink="#f4f3f1">
+      <h2 class="archive__title" data-split>Hall of fame</h2>
+      <div class="archive__grid">
+        <article class="pair" data-cursor="View"><div class="ph" data-placeholder></div><div class="hover ph ph--alt" data-placeholder></div><h3>Season</h3><span>2025</span></article>
+        <article class="pair" data-cursor="View"><div class="ph" data-placeholder></div><div class="hover ph ph--alt" data-placeholder></div><h3>Discoball</h3><span>2025</span></article>
+        <article class="pair" data-cursor="View"><div class="ph" data-placeholder></div><div class="hover ph ph--alt" data-placeholder></div><h3>Porcelain</h3><span>2024</span></article>
+        <article class="pair" data-cursor="View"><div class="ph" data-placeholder></div><div class="hover ph ph--alt" data-placeholder></div><h3>Japan</h3><span>2024</span></article>
+      </div>
+      <dl class="stats">
+        <div><dt>Wins</dt><dd data-count="12">12</dd></div>
+        <div><dt>Podiums</dt><dd data-count="48">48</dd></div>
+        <div><dt>Seasons</dt><dd data-count="7">7</dd></div>
+      </dl>
+    </section>
+
+    <!-- 6. PARTNERS: marquee, reacts to scroll velocity -->
+    <section class="partners" aria-label="Partners">
+      <div class="marquee" data-marquee>
+        <div class="marquee__inner">
+          <span>Partner One</span><span>Partner Two</span><span>Partner Three</span><span>Partner Four</span><span>Partner Five</span>
+          <span aria-hidden="true">Partner One</span><span aria-hidden="true">Partner Two</span><span aria-hidden="true">Partner Three</span><span aria-hidden="true">Partner Four</span><span aria-hidden="true">Partner Five</span>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer" id="contact" data-bg="#ff4d1c" data-ink="#111112">
+    <h2 class="footer__title" data-split>Always bringing the fight.</h2>
+    <a class="footer__cta" href="mailto:hello@example.com" data-magnetic data-cursor="Write">hello@example.com</a>
+    <p class="footer__legal">© 2026 Studio Name. Image credits: TODO(content)</p>
+  </footer>
+</body>
+</html>

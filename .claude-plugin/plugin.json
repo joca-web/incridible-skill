@@ -1,7 +1,7 @@
 {
-  "name": "incridible-skill",
-  "version": "2.0.0",
-  "description": "Awwwards-level websites: art direction, GSAP + ScrollTrigger + Lenis, a tested component library, page transitions, WebGL, image-to-code and real-input browser QA.",
+  "name": "awwwards-skill",
+  "version": "3.0.0",
+  "description": "Awwwards-level websites and the 3D models in them: art direction, GSAP + ScrollTrigger + Lenis, a tested component library, page transitions, 3D modelling in code with .glb export, 3D stages with scroll and cursor effects, and real-input browser QA.",
   "author": {
     "name": "joca-web"
   },
@@ -15,8 +15,10 @@
     "scrolltrigger",
     "lenis",
     "webgl",
+    "threejs",
+    "3d-modeling",
+    "glb",
     "page-transitions",
-    "components",
     "image-to-code"
   ]
 }

@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Repository checks for incridible-skill (current skill and the archived v1). Runs locally and in CI. Standard library only.
+"""Repository checks for awwwards-skill (current skill and the archived versions). Runs locally and in CI. Standard library only.
 
   python3 tools/validate.py
 
@@ -14,7 +14,7 @@ import sys
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
-SKILLS = [ROOT / "skills" / "incridible-skill", ROOT / "versions" / "v1" / "incridible-skill"]
+SKILLS = [ROOT / "skills" / "awwwards-skill", ROOT / "versions" / "v1" / "incridible-skill", ROOT / "versions" / "v2" / "incridible-skill"]
 errors = []
 
 
@@ -51,6 +51,15 @@ for skill in SKILLS:
         fail("SKILL.md has no YAML frontmatter")
         continue
     fm = m.group(1)
+    try:
+        import yaml  # PyYAML; an unquoted ": " in the description breaks real loaders
+        try:
+            yaml.safe_load(fm)
+            ok("frontmatter parses as YAML")
+        except yaml.YAMLError as e:
+            fail(f"frontmatter is not valid YAML: {str(e).splitlines()[0]}")
+    except ImportError:
+        print("note PyYAML not installed; strict frontmatter parse skipped (pip install pyyaml)")
     name = re.search(r"^name:\s*(.+)$", fm, re.M)
     desc = re.search(r"^description:\s*(.+)$", fm, re.M)
     (ok if name and name.group(1).strip() == skill.name else fail)(f"frontmatter name equals folder '{skill.name}'")
@@ -70,7 +79,7 @@ for skill in SKILLS:
     for js in sorted(skill.glob("scripts/*.mjs")):
         node_check(js)
     for js in sorted((skill / "assets").rglob("*.js")):
-        is_module = "components" in js.parts or js.name in ("site.js", "depth-hero.js")
+        is_module = "components" in js.parts or "three" in js.parts or "models" in js.parts or js.name in ("site.js", "depth-hero.js")
         node_check(js, module=is_module)
 
 print("\n== manifests")
@@ -88,7 +97,7 @@ except Exception as e:  # noqa: BLE001
     fail(f"manifest error: {e}")
 
 print("\n== packages")
-for f in ("dist/incridible-skill.skill", "versions/v1/incridible-skill-v1.skill"):
+for f in ("dist/awwwards-skill.skill", "dist/awwwards-skill.plugin", "versions/v1/incridible-skill-v1.skill", "versions/v2/incridible-skill-v2.skill"):
     (ok if (ROOT / f).exists() else fail)(f"{f} present")
 
 print()

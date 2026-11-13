@@ -1,10 +1,12 @@
 # Contributing
 
+The skill is **awwwards-skill** (formerly incridible-skill).
+
 Thanks for helping make this skill better. Issues and pull requests are welcome.
 
 ## What helps most
 
-- **Teardowns** of award-winning sites, added to `skills/incridible-skill/references/07-reference-teardowns.md` using its template. Only verified facts: stack, structure, rhythm, tokens. No copied photos, logos or text.
+- **Teardowns** of award-winning sites, added to `skills/awwwards-skill/references/07-reference-teardowns.md` using its template. Only verified facts: stack, structure, rhythm, tokens. No copied photos, logos or text.
 - **Recipes** that you shipped and measured (a motion pattern, a WebGL effect, an accessibility fix) with working code.
 - **Bug reports** from real runs: the prompt you gave, what the agent built, what you expected.
 - **Benchmarks**: the same brief with and without the skill, judged blind.
@@ -30,8 +32,8 @@ To try changes locally, run the installer (`./install.sh` or `.\install.ps1`) an
 To test the inspector on the starter:
 
 ```bash
-python3 -m http.server 4173 --directory skills/incridible-skill/assets/starters/monument
-node skills/incridible-skill/scripts/shoot.mjs http://localhost:4173 --out .incridible/test
+python3 -m http.server 4173 --directory skills/awwwards-skill/assets/starters/monument
+node skills/awwwards-skill/scripts/shoot.mjs http://localhost:4173 --out .awwwards/test
 ```
 
 The starter intentionally fails `placeholder-left` until its placeholders are replaced.
@@ -40,5 +42,5 @@ The starter intentionally fails `placeholder-left` until its placeholders are re
 
 1. Branch from `main`.
 2. Run `python3 tools/validate.py`.
-3. If you changed `skills/incridible-skill/`, rebuild `dist/incridible-skill.skill` (a zip of the skill folder), bump `version` in `.claude-plugin/plugin.json` and add a line to `CHANGELOG.md`. `versions/v1/` is an archive and is not edited.
+3. If you changed `skills/awwwards-skill/`, rebuild `dist/awwwards-skill.skill and dist/awwwards-skill.plugin` (a zip of the skill folder), bump `version` in `.claude-plugin/plugin.json` and add a line to `CHANGELOG.md`. `versions/` is an archive and is not edited.
 4. Describe what you tested and what you could not test.
